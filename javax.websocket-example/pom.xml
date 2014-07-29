@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <name>javax.websocket-example</name>
-  <url>http://maven.apache.org</url>
+  <url>http://eclipse.org/jetty/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,13 +40,13 @@
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>javax-websocket-server-impl</artifactId>
-      <version>9.1.0.v20131115</version>
+      <version>9.2.2.v20140723</version>
     </dependency>
     <!-- To run javax.websocket client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>javax-websocket-client-impl</artifactId>
-      <version>9.1.0.v20131115</version>
+      <version>9.2.2.v20140723</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

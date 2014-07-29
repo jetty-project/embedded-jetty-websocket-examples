@@ -33,19 +33,19 @@
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>websocket-api</artifactId>
-      <version>9.1.0.v20131115</version>
+      <version>9.2.2.v20140723</version>
     </dependency>
     <!-- To run websockets in embedded server -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>websocket-server</artifactId>
-      <version>9.1.0.v20131115</version>
+      <version>9.2.2.v20140723</version>
     </dependency>
     <!-- To run websockets client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>websocket-client</artifactId>
-      <version>9.1.0.v20131115</version>
+      <version>9.2.2.v20140723</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
