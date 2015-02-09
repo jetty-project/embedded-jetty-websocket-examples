@@ -3,8 +3,15 @@ package org.eclipse.jetty.demo;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 
+import java.util.concurrent.CountDownLatch;
+
 public class EventSocket extends WebSocketAdapter
 {
+    CountDownLatch countDownLatch;
+    public EventSocket(CountDownLatch countDownLatch) {
+        this.countDownLatch=countDownLatch;
+    }
+
     @Override
     public void onWebSocketConnect(Session sess)
     {
@@ -24,6 +31,7 @@ public class EventSocket extends WebSocketAdapter
     {
         super.onWebSocketClose(statusCode,reason);
         System.out.println("Socket Closed: [" + statusCode + "] " + reason);
+        countDownLatch.countDown();
     }
     
     @Override
@@ -31,5 +39,6 @@ public class EventSocket extends WebSocketAdapter
     {
         super.onWebSocketError(cause);
         cause.printStackTrace(System.err);
+        countDownLatch.countDown();
     }
 }
