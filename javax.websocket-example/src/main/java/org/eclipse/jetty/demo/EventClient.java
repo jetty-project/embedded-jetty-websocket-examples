@@ -37,10 +37,21 @@ public class EventClient
 
             try
             {
+                // Create client side endpoint
+                EventSocket clientEndpoint = new EventSocket();
+
                 // Attempt Connect
-                Session session = container.connectToServer(EventSocket.class,uri);
+                Session session = container.connectToServer(clientEndpoint,uri);
+
                 // Send a message
                 session.getBasicRemote().sendText("Hello");
+
+                // Send another message
+                session.getBasicRemote().sendText("Goodbye");
+
+                // Wait for remote to close
+                clientEndpoint.awaitClosure();
+
                 // Close session
                 session.close();
             }
@@ -50,10 +61,7 @@ public class EventClient
                 // This is to free up threads and resources that the
                 // JSR-356 container allocates. But unfortunately
                 // the JSR-356 spec does not handle lifecycles (yet)
-                if (container instanceof LifeCycle)
-                {
-                    ((LifeCycle)container).stop();
-                }
+                LifeCycle.stop(container);
             }
         }
         catch (Throwable t)

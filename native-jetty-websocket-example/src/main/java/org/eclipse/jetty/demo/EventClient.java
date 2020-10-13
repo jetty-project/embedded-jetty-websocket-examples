@@ -42,8 +42,16 @@ public class EventClient
                 Future<Session> fut = client.connect(socket,uri);
                 // Wait for Connect
                 Session session = fut.get();
+
                 // Send a message
                 session.getRemote().sendString("Hello");
+
+                // Send another message
+                session.getRemote().sendString("Goodbye");
+
+                // Wait for other size to close
+                socket.awaitClosure();
+
                 // Close session
                 session.close();
             }
