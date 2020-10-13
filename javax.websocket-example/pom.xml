@@ -2,52 +2,45 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.eclipse.jetty.demo</groupId>
+  <parent>
+    <groupId>org.eclipse.jetty.demos</groupId>
+    <artifactId>embedded-jetty-websocket-examples</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
   <artifactId>javax.websocket-example</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>javax.websocket-example</name>
-  <url>http://eclipse.org/jetty/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jetty-version>9.2.7.v20150116</jetty-version>
-  </properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.0</version>
-        <configuration>
-          <!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <javax.websocket.api.version>1.0</javax.websocket.api.version>
+    <jetty.version>9.4.32.v20200930</jetty.version>
+  </properties>
 
   <dependencies>
     <!-- To write basic javax.websocket against -->
     <dependency>
       <groupId>javax.websocket</groupId>
       <artifactId>javax.websocket-api</artifactId>
-      <version>1.0</version>
+      <version>${javax.websocket.api.version}</version>
     </dependency>
     <!-- To run javax.websocket in embedded server -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>javax-websocket-server-impl</artifactId>
-      <version>${jetty-version}</version>
+      <version>${jetty.version}</version>
     </dependency>
     <!-- To run javax.websocket client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>javax-websocket-client-impl</artifactId>
-      <version>${jetty-version}</version>
+      <version>${jetty.version}</version>
     </dependency>
   </dependencies>
 </project>
