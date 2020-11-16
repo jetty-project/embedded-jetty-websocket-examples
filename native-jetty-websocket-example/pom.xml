@@ -19,7 +19,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
-    <jetty.version>9.4.33.v20201020</jetty.version>
+    <jetty.version>9.4.34.v20201102</jetty.version>
   </properties>
 
   <dependencies>
