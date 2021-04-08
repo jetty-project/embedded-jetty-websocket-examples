@@ -19,10 +19,10 @@
 package org.eclipse.jetty.demo;
 
 import java.net.URI;
-import javax.websocket.ContainerProvider;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
 
+import jakarta.websocket.ContainerProvider;
+import jakarta.websocket.Session;
+import jakarta.websocket.WebSocketContainer;
 import org.eclipse.jetty.util.component.LifeCycle;
 
 public class EventClient

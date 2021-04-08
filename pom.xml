@@ -32,7 +32,7 @@
   </properties>
 
   <modules>
-    <module>javax.websocket-example</module>
+    <module>jakarta.websocket-example</module>
     <module>native-jetty-websocket-example</module>
   </modules>
 

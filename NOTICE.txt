@@ -42,7 +42,7 @@ https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html
  * javax.servlet:javax.servlet-api
  * javax.annotation:javax.annotation-api
  * javax.transaction:javax.transaction-api
- * javax.websocket:javax.websocket-api
+ * jakarta.websocket:jakarta.websocket-api
 
 If ALPN is used to negotiate HTTP/2 connections, then the following
 distribution may be included in the distribution or downloaded when ALPN

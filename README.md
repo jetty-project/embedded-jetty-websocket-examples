@@ -6,11 +6,11 @@ Note: If you want to use CDI + websockets with Jetty, check out the example proj
 
 https://github.com/jetty-project/embedded-jetty-weld
 
-There are 2 APIs you can use with Jetty, the native WebSocket API and the javax.websocket API.
+There are 2 APIs you can use with Jetty, the native WebSocket API and the `jakarta.websocket` API.
 
-# Project: javax.websocket-example
+# Project: jakarta.websocket-example
 
-Demonstration of how to create a WebSocket Client or a WebSocket Server using `javax.websocket` APIs. 
+Demonstration of how to create a WebSocket Client or a WebSocket Server using `jakarta.websocket` APIs. 
 
 
 # Project: native-jetty-websocket-example
