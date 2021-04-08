@@ -34,7 +34,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/events/")
 public class EventSocket
 {
-    private CountDownLatch closureLatch = new CountDownLatch(1);
+    private final CountDownLatch closureLatch = new CountDownLatch(1);
 
     @OnOpen
     public void onWebSocketConnect(Session sess)

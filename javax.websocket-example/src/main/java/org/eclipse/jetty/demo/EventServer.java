@@ -21,7 +21,7 @@ package org.eclipse.jetty.demo;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
+import org.eclipse.jetty.websocket.javax.server.config.JavaxWebSocketServletContainerInitializer;
 
 public class EventServer
 {
@@ -41,19 +41,18 @@ public class EventServer
         try
         {
             // Initialize javax.websocket layer
-            WebSocketServerContainerInitializer.configure(context,
-                (servletContext, wsContainer) ->
-                {
-                    // This lambda will be called at the appropriate place in the
-                    // ServletContext initialization phase where you can initialize
-                    // and configure  your websocket container.
+            JavaxWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
+            {
+                // This lambda will be called at the appropriate place in the
+                // ServletContext initialization phase where you can initialize
+                // and configure  your websocket container.
 
-                    // Configure defaults for container
-                    wsContainer.setDefaultMaxTextMessageBufferSize(65535);
+                // Configure defaults for container
+                wsContainer.setDefaultMaxTextMessageBufferSize(65535);
 
-                    // Add WebSocket endpoint to javax.websocket layer
-                    wsContainer.addEndpoint(EventSocket.class);
-                });
+                // Add WebSocket endpoint to javax.websocket layer
+                wsContainer.addEndpoint(EventSocket.class);
+            });
 
             server.start();
             server.join();

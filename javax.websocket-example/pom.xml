@@ -20,7 +20,7 @@
     <maven.compiler.target>11</maven.compiler.target>
 
     <javax.websocket.api.version>1.0</javax.websocket.api.version>
-    <jetty.version>9.4.39.v20210325</jetty.version>
+    <jetty.version>10.0.2</jetty.version>
   </properties>
 
   <dependencies>
@@ -33,13 +33,13 @@
     <!-- To run javax.websocket in embedded server -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>javax-websocket-server-impl</artifactId>
+      <artifactId>websocket-javax-server</artifactId>
       <version>${jetty.version}</version>
     </dependency>
     <!-- To run javax.websocket client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>javax-websocket-client-impl</artifactId>
+      <artifactId>websocket-javax-client</artifactId>
       <version>${jetty.version}</version>
     </dependency>
   </dependencies>

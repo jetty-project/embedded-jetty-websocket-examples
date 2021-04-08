@@ -27,7 +27,7 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 
 public class EventSocket extends WebSocketAdapter
 {
-    private CountDownLatch closureLatch = new CountDownLatch(1);
+    private final CountDownLatch closureLatch = new CountDownLatch(1);
 
     @Override
     public void onWebSocketConnect(Session sess)

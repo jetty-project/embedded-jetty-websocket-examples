@@ -18,17 +18,14 @@
 
 package org.eclipse.jetty.demo;
 
-import javax.servlet.ServletException;
-
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.websocket.server.NativeWebSocketServletContainerInitializer;
-import org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter;
+import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
 
 public class EventServer
 {
-    public static void main(String[] args) throws ServletException
+    public static void main(String[] args)
     {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
@@ -42,18 +39,14 @@ public class EventServer
         server.setHandler(context);
 
         // Configure specific websocket behavior
-        NativeWebSocketServletContainerInitializer.configure(context,
-            (servletContext, nativeWebSocketConfiguration) ->
-            {
-                // Configure default max size
-                nativeWebSocketConfiguration.getPolicy().setMaxTextMessageBufferSize(65535);
+        JettyWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
+        {
+            // Configure default max size
+            wsContainer.setMaxTextMessageSize(65535);
 
-                // Add websockets
-                nativeWebSocketConfiguration.addMapping("/events/*", EventSocket.class);
-            });
-
-        // Add generic filter that will accept WebSocket upgrade.
-        WebSocketUpgradeFilter.configure(context);
+            // Add websockets
+            wsContainer.addMapping("/events/*", EventSocket.class);
+        });
 
         try
         {

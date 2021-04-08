@@ -19,26 +19,26 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
-    <jetty.version>9.4.35.v20201120</jetty.version>
+    <jetty.version>10.0.2</jetty.version>
   </properties>
 
   <dependencies>
     <!-- To write basic websockets against -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>websocket-api</artifactId>
+      <artifactId>websocket-jetty-api</artifactId>
       <version>${jetty.version}</version>
     </dependency>
     <!-- To run websockets in embedded server -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>websocket-server</artifactId>
+      <artifactId>websocket-jetty-server</artifactId>
       <version>${jetty.version}</version>
     </dependency>
     <!-- To run websockets client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
-      <artifactId>websocket-client</artifactId>
+      <artifactId>websocket-jetty-client</artifactId>
       <version>${jetty.version}</version>
     </dependency>
   </dependencies>
