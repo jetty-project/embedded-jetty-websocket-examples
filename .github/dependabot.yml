@@ -1,10 +1,52 @@
 version: 2
 updates:
-  - package-ecosystem: "maven"
-    directory: "/"
-    schedule:
-      interval: "weekly"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "maven"
+    directory: "/"
+    target-branch: "9.4.x"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Restrict updates in this branch to jetty in the 9.4.x space
+      - dependency-name: "org.eclipse.jetty.websocket:*"
+        versions: [ ">=10.0.0" ]
+      - dependency-name: "org.eclipse.jetty:*"
+        versions: [ ">=10.0.0" ]
+      - dependency-name: "javax.servlet:*"
+        versions: [ ">=4.0.0" ]
+
+  - package-ecosystem: "maven"
+    directory: "/"
+    target-branch: "10.0.x"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Restrict updates in this branch to jetty in the 10.x.x space
+      - dependency-name: "org.eclipse.jetty.websocket:*"
+        versions: [ "<=10.0.0", ">=11.0.0" ]
+      - dependency-name: "org.eclipse.jetty:*"
+        versions: [ "<=10.0.0", ">=11.0.0" ]
+      - dependency-name: "jakarta.websocket:*"
+        versions: [ ">=2.0.0" ]
+      - dependency-name: "jakarta.servlet:*"
+        versions: [ ">=5.0.0" ]
+
+  - package-ecosystem: "maven"
+    directory: "/"
+    target-branch: "11.0.x"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Restrict updates in this branch to jetty in the 11.x.x space
+      - dependency-name: "org.eclipse.jetty.websocket:*"
+        versions: [ ">=12.0.0" ]
+      - dependency-name: "org.eclipse.jetty:*"
+        versions: [ ">=12.0.0" ]
+      - dependency-name: "jakarta.websocket:*"
+        versions: [ ">=3.0.0" ]
+      - dependency-name: "jakarta.servlet:*"
+        versions: [ ">=6.0.0" ]
