@@ -1,6 +1,6 @@
 //
 // ========================================================================
-// Copyright (c) 1995-2021 Mort Bay Consulting Pty Ltd and others.
+// Copyright (c) Mort Bay Consulting Pty Ltd and others.
 //
 // This program and the accompanying materials are made available under the
 // terms of the Eclipse Public License v. 2.0 which is available at
@@ -45,19 +45,17 @@ public class EventServer
         context.setContextPath("/");
         server.setHandler(context);
 
-        try
+        // Initialize jakarta.websocket layer
+        JakartaWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
         {
-            // Initialize jakarta.websocket layer
-            JakartaWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
-            {
-                // This lambda will be called at the appropriate place in the
-                // ServletContext initialization phase where you can initialize
-                // and configure your websocket container.
+            // This lambda will be called at the appropriate place in the
+            // ServletContext initialization phase where you can initialize
+            // and configure your websocket container.
 
             // Configure defaults for container
             wsContainer.setDefaultMaxTextMessageBufferSize(65535);
 
-                // Add WebSocket endpoint to jakarta.websocket layer
+            // Add WebSocket endpoint to jakarta.websocket layer
             wsContainer.addEndpoint(EventSocket.class);
         });
     }
