@@ -23,41 +23,47 @@ public class EventClient
 {
     public static void main(String[] args)
     {
+        EventClient client = new EventClient();
         URI uri = URI.create("ws://localhost:8080/events/");
-
-        WebSocketClient client = new WebSocketClient();
         try
         {
-            try
-            {
-                client.start();
-                // The socket that receives events
-                EventSocket socket = new EventSocket();
-                // Attempt Connect
-                Future<Session> fut = client.connect(socket,uri);
-                // Wait for Connect
-                Session session = fut.get();
-
-                // Send a message
-                session.getRemote().sendString("Hello");
-
-                // Send another message
-                session.getRemote().sendString("Goodbye");
-
-                // Wait for other size to close
-                socket.awaitClosure();
-
-                // Close session
-                session.close();
-            }
-            finally
-            {
-                client.stop();
-            }
+            client.run(uri);
         }
         catch (Throwable t)
         {
             t.printStackTrace(System.err);
+        }
+    }
+
+    public void run(URI uri) throws Exception
+    {
+        WebSocketClient client = new WebSocketClient();
+
+        try
+        {
+            client.start();
+            // The socket that receives events
+            EventSocket socket = new EventSocket();
+            // Attempt Connect
+            Future<Session> fut = client.connect(socket, uri);
+            // Wait for Connect
+            Session session = fut.get();
+
+            // Send a message
+            session.getRemote().sendString("Hello");
+
+            // Send another message
+            session.getRemote().sendString("Goodbye");
+
+            // Wait for other size to close
+            socket.awaitClosure();
+
+            // Close session
+            session.close();
+        }
+        finally
+        {
+            client.stop();
         }
     }
 }

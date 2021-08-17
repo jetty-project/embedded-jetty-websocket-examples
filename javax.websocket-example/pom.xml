@@ -42,5 +42,18 @@
       <artifactId>websocket-javax-client</artifactId>
       <version>${jetty.version}</version>
     </dependency>
+    <!-- for logging reasons -->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-slf4j-impl</artifactId>
+      <version>${jetty.version}</version>
+    </dependency>
+    <!-- to test code with -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

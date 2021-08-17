@@ -13,8 +13,10 @@
 
 package org.eclipse.jetty.demo;
 
+import java.io.IOException;
 import java.net.URI;
 import javax.websocket.ContainerProvider;
+import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
@@ -24,44 +26,49 @@ public class EventClient
 {
     public static void main(String[] args)
     {
+        EventClient client = new EventClient();
         URI uri = URI.create("ws://localhost:8080/events/");
-
         try
         {
-            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-
-            try
-            {
-                // Create client side endpoint
-                EventSocket clientEndpoint = new EventSocket();
-
-                // Attempt Connect
-                Session session = container.connectToServer(clientEndpoint,uri);
-
-                // Send a message
-                session.getBasicRemote().sendText("Hello");
-
-                // Send another message
-                session.getBasicRemote().sendText("Goodbye");
-
-                // Wait for remote to close
-                clientEndpoint.awaitClosure();
-
-                // Close session
-                session.close();
-            }
-            finally
-            {
-                // Force lifecycle stop when done with container.
-                // This is to free up threads and resources that the
-                // JSR-356 container allocates. But unfortunately
-                // the JSR-356 spec does not handle lifecycles (yet)
-                LifeCycle.stop(container);
-            }
+            client.run(uri);
         }
         catch (Throwable t)
         {
             t.printStackTrace(System.err);
+        }
+    }
+
+    public void run(URI uri) throws InterruptedException, IOException, DeploymentException
+    {
+        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+
+        try
+        {
+            // Create client side endpoint
+            EventSocket clientEndpoint = new EventSocket();
+
+            // Attempt Connect
+            Session session = container.connectToServer(clientEndpoint,uri);
+
+            // Send a message
+            session.getBasicRemote().sendText("Hello");
+
+            // Send another message
+            session.getBasicRemote().sendText("Goodbye");
+
+            // Wait for remote to close
+            clientEndpoint.awaitClosure();
+
+            // Close session
+            session.close();
+        }
+        finally
+        {
+            // Force lifecycle stop when done with container.
+            // This is to free up threads and resources that the
+            // JSR-356 container allocates. But unfortunately
+            // the JSR-356 spec does not handle lifecycles (yet)
+            LifeCycle.stop(container);
         }
     }
 }

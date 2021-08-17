@@ -13,6 +13,8 @@
 
 package org.eclipse.jetty.demo;
 
+import java.net.URI;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -20,11 +22,21 @@ import org.eclipse.jetty.websocket.javax.server.config.JavaxWebSocketServletCont
 
 public class EventServer
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        Server server = new Server();
-        ServerConnector connector = new ServerConnector(server);
-        connector.setPort(8080);
+        EventServer server = new EventServer();
+        server.setPort(8080);
+        server.start();
+        server.join();
+    }
+
+    private final Server server;
+    private final ServerConnector connector;
+
+    public EventServer()
+    {
+        server = new Server();
+        connector = new ServerConnector(server);
         server.addConnector(connector);
 
         // Setup the basic application "context" for this application at "/"
@@ -33,28 +45,44 @@ public class EventServer
         context.setContextPath("/");
         server.setHandler(context);
 
-        try
+        // Initialize javax.websocket layer
+        JavaxWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
         {
-            // Initialize javax.websocket layer
-            JavaxWebSocketServletContainerInitializer.configure(context, (servletContext, wsContainer) ->
-            {
-                // This lambda will be called at the appropriate place in the
-                // ServletContext initialization phase where you can initialize
-                // and configure  your websocket container.
+            // This lambda will be called at the appropriate place in the
+            // ServletContext initialization phase where you can initialize
+            // and configure  your websocket container.
 
-                // Configure defaults for container
-                wsContainer.setDefaultMaxTextMessageBufferSize(65535);
+            // Configure defaults for container
+            wsContainer.setDefaultMaxTextMessageBufferSize(65535);
 
-                // Add WebSocket endpoint to javax.websocket layer
-                wsContainer.addEndpoint(EventSocket.class);
-            });
+            // Add WebSocket endpoint to javax.websocket layer
+            wsContainer.addEndpoint(EventSocket.class);
+        });
+    }
 
-            server.start();
-            server.join();
-        }
-        catch (Throwable t)
-        {
-            t.printStackTrace(System.err);
-        }
+    public void setPort(int port)
+    {
+        connector.setPort(port);
+    }
+
+    public void start() throws Exception
+    {
+        server.start();
+    }
+
+    public URI getURI()
+    {
+        return server.getURI();
+    }
+
+    public void stop() throws Exception
+    {
+        server.stop();
+    }
+
+    public void join() throws InterruptedException
+    {
+        System.out.println("Use Ctrl+C to stop server");
+        server.join();
     }
 }
