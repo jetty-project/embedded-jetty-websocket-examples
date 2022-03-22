@@ -8,7 +8,7 @@ https://github.com/jetty-project/embedded-jetty-weld
 
 There are 2 APIs you can use with Jetty, the native WebSocket API and the javax.websocket API.
 
-##Build Project
+## Build Project
 ``` mvn clean install```
 
 # Project: javax.websocket-example
