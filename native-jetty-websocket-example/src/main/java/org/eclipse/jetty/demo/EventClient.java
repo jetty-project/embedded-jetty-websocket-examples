@@ -55,7 +55,7 @@ public class EventClient
             // Send another message
             session.getRemote().sendString("Goodbye");
 
-            // Wait for other size to close
+            // Wait for other side to close
             socket.awaitClosure();
 
             // Close session
