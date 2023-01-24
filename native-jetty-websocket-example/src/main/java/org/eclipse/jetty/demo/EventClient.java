@@ -43,7 +43,7 @@ public class EventClient
         {
             client.start();
             // The socket that receives events
-            EventSocket socket = new EventSocket();
+            EventEndpoint socket = new EventEndpoint();
             // Attempt Connect
             Future<Session> fut = client.connect(socket, uri);
             // Wait for Connect

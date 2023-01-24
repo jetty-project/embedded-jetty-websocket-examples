@@ -52,7 +52,7 @@ public class EventServer
             wsContainer.setMaxTextMessageSize(65535);
 
             // Add websockets
-            wsContainer.addMapping("/events/*", EventSocket.class);
+            wsContainer.addMapping("/events/*", new EventEndpointCreator());
         });
     }
 
