@@ -20,7 +20,7 @@ import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.StatusCode;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 
-public class EventSocket extends WebSocketAdapter
+public class EventEndpoint extends WebSocketAdapter
 {
     private final CountDownLatch closureLatch = new CountDownLatch(1);
 
