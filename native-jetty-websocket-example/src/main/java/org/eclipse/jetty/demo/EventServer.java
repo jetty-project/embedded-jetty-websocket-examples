@@ -19,9 +19,13 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EventServer
 {
+    private static final Logger LOG = LoggerFactory.getLogger(EventServer.class);
+
     public static void main(String[] args) throws Exception
     {
         EventServer server = new EventServer();
@@ -78,7 +82,7 @@ public class EventServer
 
     public void join() throws InterruptedException
     {
-        System.out.println("Use Ctrl+C to stop server");
+        LOG.info("Use Ctrl+C to stop server");
         server.join();
     }
 }
