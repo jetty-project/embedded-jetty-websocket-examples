@@ -49,7 +49,7 @@ public class EventServer
                 nativeWebSocketConfiguration.getPolicy().setMaxTextMessageBufferSize(65535);
 
                 // Add websockets
-                nativeWebSocketConfiguration.addMapping("/events/*", EventSocket.class);
+                nativeWebSocketConfiguration.addMapping("/events/*", new EventSocketCreator());
             });
 
         // Add generic filter that will accept WebSocket upgrade.
