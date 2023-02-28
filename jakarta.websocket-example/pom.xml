@@ -20,7 +20,7 @@
     <maven.compiler.target>11</maven.compiler.target>
 
     <jakarta.websocket.api.version>2.0.0</jakarta.websocket.api.version>
-    <jetty.version>11.0.13</jetty.version>
+    <jetty.version>11.0.14</jetty.version>
   </properties>
 
   <dependencies>
