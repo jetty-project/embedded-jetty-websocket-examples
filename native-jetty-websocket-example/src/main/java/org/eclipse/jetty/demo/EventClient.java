@@ -16,6 +16,7 @@ package org.eclipse.jetty.demo;
 import java.net.URI;
 import java.util.concurrent.Future;
 
+import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
@@ -50,10 +51,10 @@ public class EventClient
             Session session = fut.get();
 
             // Send a message
-            session.getRemote().sendString("Hello");
+            session.sendText("Hello", Callback.NOOP);
 
             // Send another message
-            session.getRemote().sendString("Goodbye");
+            session.sendText("Goodbye", Callback.NOOP);
 
             // Wait for other size to close
             socket.awaitClosure();

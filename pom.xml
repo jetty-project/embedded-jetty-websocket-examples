@@ -8,12 +8,12 @@
   <packaging>pom</packaging>
 
   <name>Embedded Jetty WebSocket Examples</name>
-  <url>http://eclipse.org/jetty/</url>
+  <url>https://eclipse.dev/jetty/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 
     <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
     <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
@@ -165,4 +165,16 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>jetty-staging</id>
+      <url>https://oss.sonatype.org/content/groups/jetty-with-staging</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>

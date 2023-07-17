@@ -16,48 +16,50 @@ package org.eclipse.jetty.demo;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 
+import org.eclipse.jetty.websocket.api.Callback;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.StatusCode;
-import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.websocket.api.annotations.OnWebSocketOpen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EventEndpoint extends WebSocketAdapter
+public class EventEndpoint
 {
     private static final Logger LOG = LoggerFactory.getLogger(EventEndpoint.class);
     private final CountDownLatch closureLatch = new CountDownLatch(1);
+    private Session session;
 
-    @Override
-    public void onWebSocketConnect(Session sess)
+    @OnWebSocketOpen
+    public void onWebSocketOpen(Session sess)
     {
-        super.onWebSocketConnect(sess);
-        LOG.debug("Endpoint connected: {}", sess);
+        LOG.debug("Endpoint open: {}", sess);
+        this.session = sess;
     }
 
-    @Override
+    @OnWebSocketMessage
     public void onWebSocketText(String message)
     {
-        super.onWebSocketText(message);
         LOG.debug("Received TEXT message: {}", message);
 
         if (message.toLowerCase(Locale.US).contains("bye"))
         {
-            getSession().close(StatusCode.NORMAL, "Thanks");
+            this.session.close(StatusCode.NORMAL, "Thanks", Callback.NOOP);
         }
     }
 
-    @Override
+    @OnWebSocketClose
     public void onWebSocketClose(int statusCode, String reason)
     {
-        super.onWebSocketClose(statusCode, reason);
-        LOG.debug("Socket Closed: [{}] {}", statusCode, reason);
+        LOG.debug("Endpoint Close: [{}] {}", statusCode, reason);
         closureLatch.countDown();
     }
 
-    @Override
+    @OnWebSocketError
     public void onWebSocketError(Throwable cause)
     {
-        super.onWebSocketError(cause);
         cause.printStackTrace(System.err);
     }
 
